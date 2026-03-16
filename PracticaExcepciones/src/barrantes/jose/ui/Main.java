@@ -39,7 +39,11 @@ public class Main {
 
                     case "5":
                         salir = true;
+                        System.out.println("Saliendo del sistema...");
                         break;
+
+                    default:
+                        System.out.println("Opción inválida.");
                 }
 
             } catch (Exception e) {
@@ -66,15 +70,36 @@ public class Main {
         System.out.print("Seleccione opción: ");
     }
 
+    public static int leerEntero(String mensaje) {
+
+        while (true) {
+
+            try {
+
+                System.out.print(mensaje);
+                return Integer.parseInt(entrada.readLine());
+
+            } catch (NumberFormatException e) {
+
+                System.out.println("Debe ingresar un número válido.");
+
+            } catch (Exception e) {
+
+                System.out.println("Error leyendo el dato.");
+            }
+        }
+    }
+
     public static void registrarUsuario(Biblioteca biblioteca) throws Exception {
 
-        System.out.print("ID usuario: ");
-        int id = Integer.parseInt(entrada.readLine());
+        int id = leerEntero("ID usuario: ");
 
         System.out.print("Nombre usuario: ");
         String nombre = entrada.readLine();
 
         biblioteca.registrarUsuario(new Usuario(id, nombre));
+
+        System.out.println("Usuario registrado correctamente.");
     }
 
     public static void registrarMaterial(Biblioteca biblioteca) throws Exception {
@@ -100,7 +125,9 @@ public class Main {
 
             biblioteca.registrarMaterial(new Libro(id, titulo, autor, isbn));
 
-        } else {
+            System.out.println("Libro registrado.");
+
+        } else if (tipo.equals("2")) {
 
             System.out.print("ID: ");
             String id = entrada.readLine();
@@ -108,10 +135,15 @@ public class Main {
             System.out.print("Titulo: ");
             String titulo = entrada.readLine();
 
-            System.out.print("Numero: ");
-            int numero = Integer.parseInt(entrada.readLine());
+            int numero = leerEntero("Numero: ");
 
             biblioteca.registrarMaterial(new Revista(id, titulo, numero));
+
+            System.out.println("Revista registrada.");
+
+        } else {
+
+            System.out.println("Tipo inválido.");
         }
     }
 
@@ -119,8 +151,7 @@ public class Main {
 
         try {
 
-            System.out.print("ID usuario: ");
-            int usuarioId = Integer.parseInt(entrada.readLine());
+            int usuarioId = leerEntero("ID usuario: ");
 
             System.out.print("ID material: ");
             String materialId = entrada.readLine();
@@ -138,6 +169,7 @@ public class Main {
             }
 
             RegistroErrores.registrar(e);
+
         } catch (Exception e) {
 
             RegistroErrores.registrar(e);
@@ -148,8 +180,7 @@ public class Main {
 
         try {
 
-            System.out.print("ID usuario: ");
-            int usuarioId = Integer.parseInt(entrada.readLine());
+            int usuarioId = leerEntero("ID usuario: ");
 
             System.out.print("ID material: ");
             String materialId = entrada.readLine();
