@@ -50,4 +50,25 @@ public class Catalogo {
     public String getNombre() {
         return nombre;
     }
+
+    @Override
+    public String toString() {
+        String resultado = "\n====== " + nombre + " ======\n";
+        if (total == 0) {
+            resultado = resultado + "Sin restaurantes registrados.";
+        } else {
+            for (int i = 0; i < total; i++) {
+                String calif = "sin calif.";
+                if (restaurantes[i].getCalificacion() > 0) {
+                    calif = "" + restaurantes[i].getCalificacion();
+                }
+                resultado = resultado + (i + 1) + ". "
+                        + restaurantes[i].getNombre()
+                        + " (" + restaurantes[i].mostrarTipo() + ")"
+                        + " | Costo: " + restaurantes[i].getCosto()
+                        + " | Calif: " + calif + "\n";
+            }
+        }
+        return resultado;
+    }
 }
